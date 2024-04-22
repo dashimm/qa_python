@@ -13,7 +13,6 @@ class TestBooksCollector:
     @pytest.mark.parametrize('name_book', ['', 'Гидразинокарбонилметилбромфенилдигидробенздиазепин'])
     def test_add_new_book_not_add_invalid_name_book(self, collector, name_book):
         collector.add_new_book(name_book)
-        collector.add_new_book(name_book)
 
         assert len(collector.get_books_genre()) == 0
 
@@ -32,14 +31,12 @@ class TestBooksCollector:
     def test_get_books_for_children_not_add_genre_age_rating(self, collector):
         collector.add_new_book('Убийство на улице Морг')
         collector.set_book_genre('Убийство на улице Морг', 'Детективы')
-        collector.get_books_for_children()
 
         assert collector.get_books_for_children() == []
 
     def test_get_books_for_children_add_book_genre_for_children(self, collector):
         collector.add_new_book('Лев и птичка')
         collector.set_book_genre('Лев и птичка', 'Мультфильмы')
-        collector.get_books_for_children()
 
         assert collector.get_books_for_children() == ['Лев и птичка']
 
@@ -48,7 +45,6 @@ class TestBooksCollector:
         collector.set_book_genre('1984', 'Фантастика')
         collector.add_new_book('Автостопом по галактике')
         collector.set_book_genre('Автостопом по галактике', 'Фантастика')
-        collector.get_books_with_specific_genre('Фантастика')
 
         assert len(collector.get_books_with_specific_genre('Фантастика')) == 2
 
@@ -67,8 +63,8 @@ class TestBooksCollector:
 
     def test_add_book_in_favorites_not_add_added_book(self, collector):
         collector.add_new_book('Убийство на улице Морг')
-        collector.add_new_book('Убийство на улице Морг')
         collector.add_book_in_favorites('Убийство на улице Морг')
+        collector.add_new_book('Убийство на улице Морг')
         collector.add_book_in_favorites('Убийство на улице Морг')
 
         assert collector.get_list_of_favorites_books().count('Убийство на улице Морг') == 1
